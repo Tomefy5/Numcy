@@ -60,11 +60,49 @@ void array<T>::determinate_shape(const nested_type<T> data) {
 template <typename T> array<T>::array(nested_type<T> data) {
   flatten(data); // flatten user input and insert into data_
   determinate_shape(data);
+  determinate_dim();
+  determinate_size();
+}
+
+template <typename U>
+std::ostream& print_recursive(std::ostream& os, const std::vector<U>& data, const std::vector<size_t>& shape, size_t dim, size_t& index) {
+  os << "[";
+  size_t count = shape[dim];
+  for(size_t i = 0; i < count; i++) {
+    if(dim < (shape.size() - 1)) {
+      print_recursive(os, data, shape, dim + 1, index);
+    } else if(dim == (shape.size() - 1)) {
+      // the last nesting
+      os << data[index++];
+    }
+    if(i < count - 1) {
+      os << ", ";
+    }
+  }
+
+  os << "]";
+
+  return os;
 }
 
 template <typename U> std::ostream& operator<<(std::ostream& os, const array<U>& arr) {
-
+  size_t index = 0;
+  return print_recursive(os, arr.data_, arr.shape_ , 0, index);
   return os;
+}
+
+template <typename U> void print(const array<U>& arr) {
+  std::cout << arr << std::endl;
+}
+
+template <typename T>
+void array<T>::determinate_dim(void) {
+  ndim = shape_.size();
+}
+
+template <typename T>
+void array<T>::determinate_size(void) {
+  size = data_.size();
 }
 
 }; // namespace numcy

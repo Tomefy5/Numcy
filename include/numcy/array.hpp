@@ -48,14 +48,21 @@ public:
   // public attributes
   std::vector<size_t> shape_;
   int ndim; // dimension
+  int size; // number of ndarray element
 
   // functions
   void flatten(nested_type<T> &data);
   void determinate_shape(const nested_type<T> data);
+  void determinate_dim(void);
+  void determinate_size(void); 
 
   // friend functions
   template <typename U>
   friend std::ostream& operator<<(std::ostream& os, const array<U>& arr);
+  template <typename U>
+  friend std::ostream& print_recursive(std::ostream& os, const std::vector<U>& data, const std::vector<size_t>& shape, size_t dim, size_t& index);
+  template <typename U>
+  friend void print(const array<U>& arr);
 
 private:
   std::vector<T> data_;
