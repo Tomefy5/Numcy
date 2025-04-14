@@ -20,12 +20,11 @@ public:
       : type(Type::LIST), list(list) {}
 
   // Accessors
-  bool is_value();
-  bool is_list();
+  bool is_value() const;
+  bool is_list() const;
 
-  // ! A treminer
-  List get_list();
-  T get_value();
+  const List& get_list() const; //return reference for avoiding copy process
+  const T& get_value() const; //return reference for avoiding copy process
 
   // friend class
   template <typename> friend class array;
@@ -40,16 +39,27 @@ private:
   List list; // A list of nested_type<T>
 };
 
-
-
-
 // class array
 template <typename T> class array {
 public:
-private:
-  std::vector<T> data;
-  std::vector<size_t> shape;
+  // Constructor
+  array(nested_type<T> data);
 
+  // public attributes
+  std::vector<size_t> shape_;
+  int ndim; // dimension
+
+  // functions
+  void flatten(nested_type<T> &data);
+  void determinate_shape(const nested_type<T> data);
+
+  // friend functions
+  template <typename U>
+  friend std::ostream& operator<<(std::ostream& os, const array<U>& arr);
+
+private:
+  std::vector<T> data_;
+  
 };
 
 }; // namespace numcy
