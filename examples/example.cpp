@@ -43,7 +43,7 @@ int main() {
     cout << ar(0,1) << endl;
 
     std::vector<size_t> shape = {1, 2};
-    numcy::array<int> tab = numcy::fill_with_number<int>({3, 3}, 2);
+    numcy::array<double> tab = numcy::fill_with_number<double>({3, 3}, 2);
 
     print(tab);
 
@@ -52,6 +52,8 @@ int main() {
 
     numcy::array<float> tab_one = numcy::ones({3, 3});
     print(tab_one);
+
+    cout << "Sum: " << numcy::sum(tab) << endl;
 
     return 0;
 }

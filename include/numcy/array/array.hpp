@@ -75,6 +75,8 @@ public:
 
   // maths functions
   friend float sum(const array<float>& arr);
+  friend float sum(const array<double>& arr);
+  friend float sum(const array<int>& arr);
 
 private:
   std::vector<T> data_;
