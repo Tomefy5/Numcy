@@ -49,12 +49,15 @@ public:
   std::vector<size_t> shape_;
   int ndim; // dimension
   int size; // number of ndarray element
+  std::vector<size_t> strides_;
 
   // functions
   void flatten(nested_type<T> &data);
   void determinate_shape(const nested_type<T> data);
   void determinate_dim(void);
-  void determinate_size(void); 
+  void determinate_size(void);
+  template <typename... Args> 
+  T& operator()(Args... args);
 
   // friend functions
   template <typename U>
@@ -66,6 +69,8 @@ public:
 
 private:
   std::vector<T> data_;
+  void determinate_strides(void); // step for navigating
+  
   
 };
 

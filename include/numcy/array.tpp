@@ -62,6 +62,7 @@ template <typename T> array<T>::array(nested_type<T> data) {
   determinate_shape(data);
   determinate_dim();
   determinate_size();
+  determinate_strides();
 }
 
 template <typename U>
@@ -103,6 +104,28 @@ void array<T>::determinate_dim(void) {
 template <typename T>
 void array<T>::determinate_size(void) {
   size = data_.size();
+}
+
+template <typename T>
+void array<T>::determinate_strides(void) {
+  size_t stride = 1;
+  for(int i = (shape_.size() - 1); i >= 0; i--) {
+    strides_.insert(strides_.begin(), stride);
+    stride *= shape_[i];
+  }
+}
+
+template <typename T>
+template <typename... Args> 
+T& array<T>::operator()(Args... args) {
+  size_t el_index = 0;
+  size_t indices[] = { static_cast<size_t>(args)... }; // convert args into size_t type and build array
+
+  for(size_t i = 0; i < strides_.size(); i++) {
+    el_index += strides_[i] * indices[i];
+  }
+
+  return this->data_[el_index];
 }
 
 }; // namespace numcy

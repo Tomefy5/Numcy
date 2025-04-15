@@ -1,7 +1,17 @@
 #include <iostream>
 #include "numcy.hpp"
+#include <vector>
 
 using namespace std;
+
+template <typename... Args>
+void test(Args... args) {
+    vector<int> vec;
+    (vec.push_back(args), ...);
+    for(auto el : vec) {
+        cout << "El: " << el << endl;
+    }
+} 
 
 int main() {
     numcy::nested_type<float> nt({1, 2, 3, 2, 3, 1, 4});
@@ -12,7 +22,9 @@ int main() {
         std::cout << "Value: " << nt.get_value() << std::endl;
     }
 
-    numcy::array<float> ar({{{1, 2}, {3, 1}}, {{2, 3}, {2, 3}}});
+    numcy::array<float> ar({
+        {2,7}, 
+        {9,0}});
     ar.determinate_shape(2.3312321);
     for(auto i = 0; i < ar.shape_.size(); i++) {
         cout << "Shape[" << i << "] = " << ar.shape_[i] << endl; 
@@ -21,6 +33,14 @@ int main() {
     print(ar);
     cout << "Dim: " << ar.ndim << endl;
     cout << "Size: " << ar.size << endl;
+
+    test(2,3,4);
+
+    for(auto el: ar.strides_) {
+        cout << "Pas: " << el << endl;
+    }
+
+    cout << ar(0,1) << endl;
 
     return 0;
 }
