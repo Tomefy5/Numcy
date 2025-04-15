@@ -82,6 +82,14 @@ public:
   friend float mean(const array<double>& arr);
   friend float mean(const array<int>& arr);
 
+  friend float min(const array<float>& arr);
+  friend double min(const array<double>& arr);
+  friend int min(const array<int>& arr);
+
+  friend float max(const array<float>& arr);
+  friend double max(const array<double>& arr);
+  friend int max(const array<int>& arr);
+
 private:
   std::vector<T> data_;
   void determinate_strides(void); // step for navigating
