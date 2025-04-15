@@ -1,2 +1,2 @@
-#include "numcy/array.hpp"
-#include "numcy/utils.hpp"
+#include "numcy/array/array.hpp"
+#include "numcy/utils/utils.hpp"

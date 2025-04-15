@@ -89,7 +89,6 @@ std::ostream& print_recursive(std::ostream& os, const std::vector<U>& data, cons
 template <typename U> std::ostream& operator<<(std::ostream& os, const array<U>& arr) {
   size_t index = 0;
   return print_recursive(os, arr.data_, arr.shape_ , 0, index);
-  return os;
 }
 
 template <typename U> void print(const array<U>& arr) {
