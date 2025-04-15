@@ -43,6 +43,7 @@ private:
 template <typename T> class array {
 public:
   // Constructor
+  array(void){} // default
   array(nested_type<T> data);
 
   // public attributes
@@ -66,6 +67,14 @@ public:
   friend std::ostream& print_recursive(std::ostream& os, const std::vector<U>& data, const std::vector<size_t>& shape, size_t dim, size_t& index);
   template <typename U>
   friend void print(const array<U>& arr);
+  template <typename V>
+  friend array<V> fill_with_number(const std::vector<size_t>& shape, V number);
+  friend array<float> zeros(const std::vector<size_t>& shape);
+  friend array<float> ones(const std::vector<size_t>& shape);
+
+
+  // maths functions
+  friend float sum(const array<float>& arr);
 
 private:
   std::vector<T> data_;

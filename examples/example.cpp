@@ -42,5 +42,16 @@ int main() {
 
     cout << ar(0,1) << endl;
 
+    std::vector<size_t> shape = {1, 2};
+    numcy::array<int> tab = numcy::fill_with_number<int>({3, 3}, 2);
+
+    print(tab);
+
+    numcy::array<float> tab_zero = numcy::zeros({3, 3});
+    print(tab_zero);
+
+    numcy::array<float> tab_one = numcy::ones({3, 3});
+    print(tab_one);
+
     return 0;
 }
