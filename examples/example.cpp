@@ -24,7 +24,7 @@ int main() {
 
     numcy::array<float> ar({
         {2,7}, 
-        {9,0}});
+        {9,1.456}});
     ar.determinate_shape(2.3312321);
     for(auto i = 0; i < ar.shape_.size(); i++) {
         cout << "Shape[" << i << "] = " << ar.shape_[i] << endl; 
@@ -54,6 +54,7 @@ int main() {
     print(tab_one);
 
     cout << "Sum: " << numcy::sum(tab) << endl;
+    cout << "Mean: " << numcy::mean(ar) << endl;
 
     return 0;
 }

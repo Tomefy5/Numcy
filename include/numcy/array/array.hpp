@@ -78,6 +78,10 @@ public:
   friend float sum(const array<double>& arr);
   friend float sum(const array<int>& arr);
 
+  friend float mean(const array<float>& arr);
+  friend float mean(const array<double>& arr);
+  friend float mean(const array<int>& arr);
+
 private:
   std::vector<T> data_;
   void determinate_strides(void); // step for navigating
