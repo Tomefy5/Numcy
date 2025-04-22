@@ -59,6 +59,7 @@ public:
   void determinate_size(void);
   template <typename... Args> 
   T& operator()(Args... args);
+  void reshape(std::vector<size_t> new_shape);
 
   // friend functions
   template <typename U>

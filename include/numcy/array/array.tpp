@@ -127,4 +127,24 @@ T& array<T>::operator()(Args... args) {
   return this->data_[el_index];
 }
 
+template <typename T>
+void array<T>::reshape(std::vector<size_t> new_shape) {
+  float size = 1;
+
+  // compute the mul of new_shape elements
+  for(int i = 0; i < new_shape.size(); i++) {
+    size *= new_shape[i];
+  }
+
+  if(this->data_.size() != size) {
+    std::cerr << "Error: verify your shape" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
+  this->shape_ = new_shape;
+  determinate_dim();
+  determinate_size();
+  determinate_strides();
+}
+
 }; // namespace numcy

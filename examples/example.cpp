@@ -59,11 +59,16 @@ int main() {
     cout << "Max: " << numcy::max(ar) << endl;
     cout << "Argmin: " << numcy::argmin(ar) << endl;
 
-    numcy::array<float> nd1 = numcy::ones({2,2});
-    numcy::array<float> nd2 = numcy::ones({2,2});
+    numcy::array<float> nd1 = numcy::ones({6,2});
+    // numcy::array<float> nd2 = numcy::ones({2,2});
 
-    numcy::array<float> res = numcy::div(nd1, nd2);
-    print(res);
+    // numcy::array<float> res = numcy::div(nd1, nd2);
+    // print(res);
+
+    print(nd1);
+    nd1.reshape({3, 4});
+    print(nd1);
+
 
 
     return 0;
