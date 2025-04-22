@@ -87,4 +87,61 @@ int max(const array<int> &arr) {
   }
   return max;
 }
+
+
+// argmin functions and its overloads
+size_t argmin(const array<float> &arr) {
+  size_t id_min = 0;
+  for (size_t i = 1; i < arr.data_.size(); i++) {
+    if (arr.data_[id_min] > arr.data_[i])
+      id_min = i;
+  }
+  return id_min;
+}
+
+size_t argmin(const array<double> &arr) {
+  size_t id_min = 0;
+  for (size_t i = 1; i < arr.data_.size(); i++) {
+    if (arr.data_[id_min] > arr.data_[i])
+      id_min = i;
+  }
+  return id_min;
+}
+
+size_t argmin(const array<int> &arr) {
+  size_t id_min = 0;
+  for (size_t i = 1; i < arr.data_.size(); i++) {
+    if (arr.data_[id_min] > arr.data_[i])
+      id_min = i;
+  }
+  return id_min;
+}
+
+// argmax functions and its overloads
+size_t argmax(const array<float> &arr) {
+  size_t id_min = 0;
+  for (size_t i = 1; i < arr.data_.size(); i++) {
+    if (arr.data_[id_min] < arr.data_[i])
+      id_min = i;
+  }
+  return id_min;
+}
+
+size_t argmax(const array<double> &arr) {
+  size_t id_min = 0;
+  for (size_t i = 1; i < arr.data_.size(); i++) {
+    if (arr.data_[id_min] < arr.data_[i])
+      id_min = i;
+  }
+  return id_min;
+}
+
+size_t argmax(const array<int> &arr) {
+  size_t id_min = 0;
+  for (size_t i = 1; i < arr.data_.size(); i++) {
+    if (arr.data_[id_min] < arr.data_[i])
+      id_min = i;
+  }
+  return id_min;
+}
 } // namespace numcy

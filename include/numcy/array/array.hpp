@@ -39,7 +39,7 @@ private:
   List list; // A list of nested_type<T>
 };
 
-// class array
+/*===================================ARRAY===================================================*/
 template <typename T> class array {
 public:
   // Constructor
@@ -72,6 +72,16 @@ public:
   friend array<float> zeros(const std::vector<size_t>& shape);
   friend array<float> ones(const std::vector<size_t>& shape);
 
+  // elementary operations
+  template <typename X>
+  friend array<X> add(const array<X> nd_arr,const array<X> other);
+  template <typename X>
+  friend array<X> sub(const array<X> nd_arr,const array<X> other);
+  template <typename X>
+  friend array<X> mul(const array<X> nd_arr,const array<X> other);
+  template <typename X>
+  friend array<X> div(const array<X> nd_arr,const array<X> other);
+
 
   // maths functions
   friend float sum(const array<float>& arr);
@@ -89,6 +99,14 @@ public:
   friend float max(const array<float>& arr);
   friend double max(const array<double>& arr);
   friend int max(const array<int>& arr);
+
+  friend size_t argmin(const array<float>& arr);
+  friend size_t argmin(const array<double>& arr);
+  friend size_t argmin(const array<int>& arr);
+
+  friend size_t argmax(const array<float>& arr);
+  friend size_t argmax(const array<double>& arr);
+  friend size_t argmax(const array<int>& arr);
 
 private:
   std::vector<T> data_;

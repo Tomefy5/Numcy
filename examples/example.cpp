@@ -57,6 +57,14 @@ int main() {
     cout << "Mean: " << numcy::mean(ar) << endl;
     cout << "Min: " << numcy::min(ar) << endl;
     cout << "Max: " << numcy::max(ar) << endl;
+    cout << "Argmin: " << numcy::argmin(ar) << endl;
+
+    numcy::array<float> nd1 = numcy::ones({2,2});
+    numcy::array<float> nd2 = numcy::ones({2,2});
+
+    numcy::array<float> res = numcy::div(nd1, nd2);
+    print(res);
+
 
     return 0;
 }
