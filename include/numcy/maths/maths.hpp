@@ -32,6 +32,22 @@ size_t argmin(const array<int> &arr);
 size_t argmax(const array<float> &arr);
 size_t argmax(const array<double> &arr);
 size_t argmax(const array<int> &arr);
+
+// Trigos
+template <typename M>
+array<M> sin(array<M> arr);
+template <typename M>
+array<M> cos(array<M> arr);
+template <typename M>
+array<M> tan(array<M> arr);
+template <typename M>
+array<M> exp(array<M> arr);
+template <typename M>
+array<M> log(array<M> arr);
+template <typename M>
+array<M> abs(array<M> arr);
+
+
 } // namespace numcy
 
 #include "maths.tpp"

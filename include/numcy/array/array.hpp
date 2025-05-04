@@ -109,6 +109,18 @@ public:
   friend size_t argmax(const array<double>& arr);
   friend size_t argmax(const array<int>& arr);
 
+  template <typename M>
+  friend array<M> sin(array<M> arr);
+  template <typename M>
+  friend array<M> cos(array<M> arr);
+  template <typename M>
+  friend array<M> tan(array<M> arr);
+  template <typename M>
+  friend array<M> exp(array<M> arr);
+  template <typename M>
+  friend array<M> log(array<M> arr);
+  template <typename M>
+  friend array<M> abs(array<M> arr);
 private:
   std::vector<T> data_;
   void determinate_strides(void); // step for navigating

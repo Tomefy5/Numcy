@@ -1,4 +1,5 @@
 #include "../array/array.hpp"
+#include <cmath>
 
 namespace numcy {
 
@@ -144,4 +145,129 @@ size_t argmax(const array<int> &arr) {
   }
   return id_min;
 }
+
+
+// Trigos and other maths
+
+template <typename M>
+array<M> sin(array<M> arr) {
+  array<M> result;
+  result.shape_ = arr.shape_;
+  result.ndim = arr.ndim;
+  result.size = arr.size;
+  result.strides_ = arr.strides_;
+
+  result.data_.resize(arr.data_.size());
+
+  for(size_t i = 0; i < arr.data_.size(); i++) {
+    if(arr.data_[i] > 1 || arr.data_[i] < -1) {
+      std::cerr << "Angle's value must be between 1 and -1" << std::endl;
+      exit(EXIT_FAILURE);
+    }
+    result.data_[i] = std::sin(arr.data_[i]);
+  }
+
+  return result;
+
+}
+
+template <typename M>
+array<M> cos(array<M> arr) {
+  array<M> result;
+  result.shape_ = arr.shape_;
+  result.ndim = arr.ndim;
+  result.size = arr.size;
+  result.strides_ = arr.strides_;
+
+  result.data_.resize(arr.data_.size());
+
+  for(size_t i = 0; i < arr.data_.size(); i++) {
+    if(arr.data_[i] > 1 || arr.data_[i] < -1) {
+      std::cerr << "Angle's value must be between 1 and -1" << std::endl;
+      exit(EXIT_FAILURE);
+    }
+    result.data_[i] = std::cos(arr.data_[i]);
+  }
+
+  return result;
+
+}
+
+template <typename M>
+array<M> tan(array<M> arr) {
+  array<M> result;
+  result.shape_ = arr.shape_;
+  result.ndim = arr.ndim;
+  result.size = arr.size;
+  result.strides_ = arr.strides_;
+
+  result.data_.resize(arr.data_.size());
+
+  for(size_t i = 0; i < arr.data_.size(); i++) {
+    if(arr.data_[i] > 1 || arr.data_[i] < -1) {
+      std::cerr << "Angle's value must be between 1 and -1" << std::endl;
+      exit(EXIT_FAILURE);
+    }
+    result.data_[i] = std::tan(arr.data_[i]);
+  }
+
+  return result;
+
+}
+
+
+template <typename M>
+array<M> exp(array<M> arr) {
+  array<M> result;
+  result.shape_ = arr.shape_;
+  result.ndim = arr.ndim;
+  result.size = arr.size;
+  result.strides_ = arr.strides_;
+
+  result.data_.resize(arr.data_.size());
+
+  for(size_t i = 0; i < arr.data_.size(); i++) {
+    result.data_[i] = std::exp(arr.data_[i]);
+  }
+
+  return result;
+
+}
+
+template <typename M>
+array<M> log(array<M> arr) {
+  array<M> result;
+  result.shape_ = arr.shape_;
+  result.ndim = arr.ndim;
+  result.size = arr.size;
+  result.strides_ = arr.strides_;
+
+  result.data_.resize(arr.data_.size());
+
+  for(size_t i = 0; i < arr.data_.size(); i++) {
+    result.data_[i] = std::log(arr.data_[i]);
+  }
+
+  return result;
+
+}
+
+template <typename M>
+array<M> abs(array<M> arr) {
+  array<M> result;
+  result.shape_ = arr.shape_;
+  result.ndim = arr.ndim;
+  result.size = arr.size;
+  result.strides_ = arr.strides_;
+
+  result.data_.resize(arr.data_.size());
+
+  for(size_t i = 0; i < arr.data_.size(); i++) {
+    result.data_[i] = std::abs(arr.data_[i]);
+  }
+
+  return result;
+
+}
+
 } // namespace numcy
