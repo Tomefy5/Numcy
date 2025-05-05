@@ -1,5 +1,7 @@
 #include "array.hpp"
 #include <iostream>
+#include <typeinfo>
+#include <vector>
 
 namespace numcy {
 template <typename T> bool nested_type<T>::is_list() const {
@@ -43,6 +45,8 @@ template <typename T> void array<T>::flatten(nested_type<T> &data) {
   }
 }
 
+template <typename T> std::vector<T> array<T>::flatten() { return data_; }
+
 template <typename T>
 void array<T>::determinate_shape(const nested_type<T> data) {
   if (data.is_value()) {
@@ -64,6 +68,16 @@ template <typename T> array<T>::array(nested_type<T> data) {
   determinate_dim();
   determinate_size();
   determinate_strides();
+  // initialize dtype
+  if (typeid(T) == typeid(float)) {
+    dtype = "float32";
+  } else if (typeid(T) == typeid(double)) {
+    dtype = "float64";
+  } else if (typeid(T) == typeid(int)) {
+    dtype = "int32";
+  } else {
+    dtype = "undefined";
+  }
 }
 
 template <typename U>
@@ -76,11 +90,13 @@ std::ostream &print_recursive(std::ostream &os, const std::vector<U> &data,
 
   for (size_t i = 0; i < count; i++) {
     if (dim < shape.size() - 1) {
-      if (i > 0) os << "\n" << next_indent;
+      if (i > 0)
+        os << "\n" << next_indent;
       print_recursive(os, data, shape, dim + 1, index, next_indent);
     } else {
       os << data[index++];
-      if (i < count - 1) os << ", ";
+      if (i < count - 1)
+        os << ", ";
     }
   }
 
@@ -96,6 +112,39 @@ std::ostream &operator<<(std::ostream &os, const array<U> &arr) {
 
 template <typename U> void print(const array<U> &arr) {
   std::cout << arr << std::endl;
+}
+
+void print(std::vector<size_t> shape) {
+  std::cout << "(";
+
+  for (size_t i = 0; i < shape.size(); i++) {
+    if (i != shape.size() - 1) {
+      std::cout << shape[i] << ", ";
+    } else {
+      std::cout << shape[i];
+    }
+  }
+
+  std::cout << ")\n";
+}
+
+template <typename... Args> void print(Args... args) {
+  (std::cout << ... << args);
+  std::cout << std::endl;
+}
+
+template <typename T> void print(std::vector<T> array) {
+  std::cout << "[ ";
+
+  for (size_t i = 0; i < array.size(); i++) {
+    if (i != array.size() - 1) {
+      std::cout << array[i] << " ";
+    } else {
+      std::cout << array[i];
+    }
+  }
+
+  std::cout << " ]\n";
 }
 
 template <typename T> void array<T>::determinate_dim(void) {
@@ -116,7 +165,7 @@ template <typename T> void array<T>::determinate_strides(void) {
 
 template <typename T>
 template <typename... Args>
-T &array<T>::operator()(Args... args) {
+auto array<T>::operator()(Args... args) {
   size_t el_index = 0;
   size_t indices[] = {static_cast<size_t>(
       args)...}; // convert args into size_t type and build array
