@@ -1,5 +1,6 @@
-#include "../array/array.hpp"
+#include "../core/array.hpp"
 #include <cmath>
+#include <optional>
 
 namespace numcy {
 

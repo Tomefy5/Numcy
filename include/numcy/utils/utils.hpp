@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../array/array.hpp"
+#include "../core/array.hpp"
 #include <vector>
 
 namespace numcy  {

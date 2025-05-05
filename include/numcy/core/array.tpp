@@ -69,23 +69,22 @@ template <typename T> array<T>::array(nested_type<T> data) {
 template <typename U>
 std::ostream &print_recursive(std::ostream &os, const std::vector<U> &data,
                               const std::vector<size_t> &shape, size_t dim,
-                              size_t &index) {
+                              size_t &index, const std::string &indent = "") {
   os << "[";
   size_t count = shape[dim];
+  std::string next_indent = indent + " ";
+
   for (size_t i = 0; i < count; i++) {
-    if (dim < (shape.size() - 1)) {
-      print_recursive(os, data, shape, dim + 1, index);
-    } else if (dim == (shape.size() - 1)) {
-      // the last nesting
+    if (dim < shape.size() - 1) {
+      if (i > 0) os << "\n" << next_indent;
+      print_recursive(os, data, shape, dim + 1, index, next_indent);
+    } else {
       os << data[index++];
-    }
-    if (i < count - 1) {
-      os << ", ";
+      if (i < count - 1) os << ", ";
     }
   }
 
   os << "]";
-
   return os;
 }
 
