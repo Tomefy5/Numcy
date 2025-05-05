@@ -45,13 +45,14 @@ int main() {
     print("\nCarrée: \n");
     print(numcy::square(arr));
 
+    print("\n===========================================================================\n");
+    print("\nTableau trigo: \n");
+
     numcy::array<float> arr_trigo({
         {1, 0.5},
         {0.25, 0.75} 
     });
 
-    print("\n===========================================================================\n");
-    print("\nTableau trigo: \n");
     print(arr_trigo);
     
     // Trigo
