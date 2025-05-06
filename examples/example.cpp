@@ -90,6 +90,42 @@ int main() {
     print("\nCeil: \n");
     print(numcy::ceil(arr_round));
 
+
+    print("\n===========================================================================\n");
+    print("Statistiques: \n");
+
+    numcy::array<float> arr_stat({
+        {10, 20, 30},
+        {40, 50, 60},
+        {70, 80, 90}, 
+    });
+
+    print(arr_stat);
+
+    print("\nSum: ", numcy::sum(arr_stat));
+    print("Mean: ", numcy::mean(arr_stat));
+    print("Max: ", numcy::max(arr_stat));
+    print("Min: ", numcy::min(arr_stat));
+    print("Argmax: ", numcy::argmax(arr_stat));
+    print("Argmin: ", numcy::argmin(arr_stat));
+    print("Variance: ", numcy::var(arr_stat));
+    print("Ecart-type: ", numcy::std(arr_stat), "\n");
+
+    print("\n===========================================================================\n");
+    print("Random: \n");
+    std::vector<size_t> shape = {2, 3};
+    print("\nInitialisation avec rand: \n");
+    numcy::array<float> rand_arr = numcy::random::rand(shape);
+    print(rand_arr);
+
+    print("\nInitialisation avec randn: \n");
+    numcy::array<float> randn_arr = numcy::random::randn(shape);
+    print(randn_arr);
+
+    print("\nInitialisation avec randint: \n");
+    numcy::array<float> randint_arr = numcy::random::randint(45, 100, shape);
+    print(randint_arr);
+
     return 0;
 }
 

@@ -40,6 +40,12 @@ private:
   List list; // A list of nested_type<T>
 };
 
+namespace random {
+ array<float> rand(std::vector<size_t> shape);
+ array<float> randn(std::vector<size_t> shape);
+ array<float> randint(int low, int high, int size);
+} // namespace random
+
 /*===================================ARRAY===================================================*/
 template <typename T> class array {
 public:
@@ -60,6 +66,7 @@ public:
   void determinate_shape(const nested_type<T> data);
   void determinate_dim(void);
   void determinate_size(void);
+  void determinate_strides(void); // step for navigating
   template <typename... Args> auto operator()(Args... args);
   void reshape(std::vector<size_t> new_shape);
 
@@ -68,14 +75,14 @@ public:
   friend void print(std::vector<size_t> shape);
   friend void print(std::vector<T> array);
   template <typename... Args> friend void print(Args... args);
-
-  // friend functions
   template <typename U>
   friend std::ostream &operator<<(std::ostream &os, const array<U> &arr);
   template <typename U>
   friend std::ostream &
   print_recursive(std::ostream &os, const std::vector<U> &data,
                   const std::vector<size_t> &shape, size_t dim, size_t &index);
+
+  // Generators
   template <typename V>
   friend array<V> fill_with_number(const std::vector<size_t> &shape, V number);
   friend array<float> zeros(const std::vector<size_t> &shape);
@@ -91,31 +98,29 @@ public:
   template <typename X>
   friend array<X> div(const array<X> nd_arr, const array<X> other);
 
-  // maths functions
+  // Stats functions
   friend float sum(const array<float> &arr);
   friend float sum(const array<double> &arr);
   friend float sum(const array<int> &arr);
-
   friend float mean(const array<float> &arr);
   friend float mean(const array<double> &arr);
   friend float mean(const array<int> &arr);
-
   friend float min(const array<float> &arr);
   friend double min(const array<double> &arr);
   friend int min(const array<int> &arr);
-
   friend float max(const array<float> &arr);
   friend double max(const array<double> &arr);
   friend int max(const array<int> &arr);
-
   friend size_t argmin(const array<float> &arr);
   friend size_t argmin(const array<double> &arr);
   friend size_t argmin(const array<int> &arr);
-
   friend size_t argmax(const array<float> &arr);
   friend size_t argmax(const array<double> &arr);
   friend size_t argmax(const array<int> &arr);
+  template <typename S> friend double var(array<S> arr);
+  template <typename S> friend double std(array<S> arr);
 
+  // Maths functions
   template <typename M> friend array<M> sin(array<M> arr);
   template <typename M> friend array<M> cos(array<M> arr);
   template <typename M> friend array<M> tan(array<M> arr);
@@ -129,12 +134,16 @@ public:
   template <typename M> friend array<int> round(array<M> arr);
   template <typename M> friend array<int> ceil(array<M> arr);
 
+  friend numcy::array<float> numcy::random::rand(std::vector<size_t> shape);
+  friend numcy::array<float> numcy::random::randn(std::vector<size_t> shape);
+  friend numcy::array<float> numcy::random::randint(int low, int high, std::vector<size_t> shape);
+
 private:
   std::vector<T> data_;
-  void determinate_strides(void); // step for navigating
 };
 
 }; // namespace numcy
 
 #include "../maths/maths.tpp"
+#include "../random/random.tpp"
 #include "array.tpp"
